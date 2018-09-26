@@ -13,5 +13,13 @@ namespace TestNSwagNetCoreApp
         {
             return "Hello";
         }
+
+        [HttpPut("Upload")]
+        [RequestSizeLimit(100_000_000)]
+        // 100MiB
+        public string PostFile(FileUploadModel upload)
+        {
+            return upload.File.FileName;
+        }
     }
 }

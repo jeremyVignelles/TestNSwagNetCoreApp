@@ -1,9 +1,9 @@
-﻿using Microsoft.AspNetCore;
-using Microsoft.AspNetCore.Hosting;
-
-namespace TestNSwagNetCoreApp
+﻿namespace TestNSwagNetCoreApp
 {
+    using System.Reflection;
+    using Microsoft.AspNetCore;
     using Microsoft.AspNetCore.Builder;
+    using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.Extensions.DependencyInjection;
     using NJsonSchema;
@@ -26,6 +26,20 @@ namespace TestNSwagNetCoreApp
                 })
                 .Configure(app =>
                 {
+                    //* // Remove/Add one slash at the beginning of this line to switch between versions
+
+                    // Works: provides a Form to upload in Swagger UI
+                    app.UseSwaggerUi3(Assembly.GetExecutingAssembly(), swagger =>
+                    {
+                        swagger.GeneratorSettings.IsAspNetCore = true;
+                        swagger.GeneratorSettings.DefaultPropertyNameHandling = PropertyNameHandling.CamelCase;
+                        swagger.GeneratorSettings.DefaultEnumHandling = EnumHandling.Integer;
+                        swagger.GeneratorSettings.DefaultReferenceTypeNullHandling = ReferenceTypeNullHandling.NotNull;
+                        swagger.GeneratorSettings.GenerateKnownTypes = true;
+                        swagger.DocExpansion = "list";
+                    });
+                    /*/
+                    // Doesn't work: expects a JSON to be given
                     app.UseSwaggerUi3WithApiExplorer(swagger =>
                     {
                         swagger.GeneratorSettings.DefaultPropertyNameHandling = PropertyNameHandling.CamelCase;
@@ -35,6 +49,7 @@ namespace TestNSwagNetCoreApp
                         swagger.GeneratorSettings.SchemaType = SchemaType.OpenApi3;
                         swagger.DocExpansion = "list";
                     });
+                    //*/
 
                     app.UseMvc();
                 });
