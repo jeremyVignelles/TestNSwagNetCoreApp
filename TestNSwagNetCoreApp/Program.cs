@@ -21,21 +21,20 @@ namespace TestNSwagNetCoreApp
                 .UseKestrel()
                 .ConfigureServices(services =>
                 {
+                    services.AddOpenApiDocument(configure =>
+                        {
+                            configure.DefaultPropertyNameHandling = PropertyNameHandling.CamelCase;
+                            configure.DefaultEnumHandling = EnumHandling.Integer;
+                            configure.DefaultReferenceTypeNullHandling = ReferenceTypeNullHandling.NotNull;
+                            configure.GenerateKnownTypes = true;
+                        });
                     services.AddMvc()
                         .SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
                 })
                 .Configure(app =>
                 {
-                    app.UseSwaggerUi3WithApiExplorer(swagger =>
-                    {
-                        swagger.GeneratorSettings.DefaultPropertyNameHandling = PropertyNameHandling.CamelCase;
-                        swagger.GeneratorSettings.DefaultEnumHandling = EnumHandling.Integer;
-                        swagger.GeneratorSettings.DefaultReferenceTypeNullHandling = ReferenceTypeNullHandling.NotNull;
-                        swagger.GeneratorSettings.GenerateKnownTypes = true;
-                        swagger.GeneratorSettings.SchemaType = SchemaType.OpenApi3;
-                        swagger.DocExpansion = "list";
-                    });
-
+                    app.UseSwagger()
+                        .UseSwaggerUi3();
                     app.UseMvc();
                 });
     }
