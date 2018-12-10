@@ -3,21 +3,31 @@
 namespace TestNSwagNetCoreApp
 {
     using System;
+    using Newtonsoft.Json;
     using NJsonSchema.Annotations;
 
+    /// <summary>
+    /// 
+    /// </summary>
     [ApiExplorerSettings(IgnoreApi = false, GroupName = nameof(HelloController))]
     [ApiController]
     [Route("Hello")]
     public class HelloController : Controller
     {
-        // GET
+        /// <summary>
+        /// Returns a greeting message
+        /// </summary>
+        /// <returns>The greeting message</returns>
         [HttpGet("Index")]
         public string Index()
         {
             return "Hello";
         }
 
-        // GET
+        /// <summary>
+        /// Returns a greeting message, as a JSON object
+        /// </summary>
+        /// <returns>The greeting message</returns>
         [HttpGet("Model")]
         public HelloWorldModel Model()
         {
@@ -25,11 +35,21 @@ namespace TestNSwagNetCoreApp
         }
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    [JsonObject(ItemRequired = Required.Always)]
     public class HelloWorldModel
     {
+        /// <summary>
+        /// 
+        /// </summary>
         public string Hello { get; set; } = "World";
 
-        [CanBeNull]
+        /// <summary>
+        /// 
+        /// </summary>
+        [JsonProperty(Required = Required.AllowNull)]
         public string Extra { get; set; }
 
         /// <summary>

@@ -23,8 +23,6 @@ namespace TestNSwagNetCoreApp
                 {
                     services.AddOpenApiDocument(configure =>
                         {
-                            configure.DefaultPropertyNameHandling = PropertyNameHandling.CamelCase;
-                            configure.DefaultEnumHandling = EnumHandling.Integer;
                             configure.DefaultReferenceTypeNullHandling = ReferenceTypeNullHandling.NotNull;
                             configure.GenerateKnownTypes = true;
                         });
