@@ -33,6 +33,12 @@ namespace TestNSwagNetCoreApp
         {
             return new HelloWorldModel();
         }
+
+        [HttpPut("Model")]
+        public string SendModel(HelloWorldModel model)
+        {
+            return "OK";
+        }
     }
 
     /// <summary>
@@ -53,8 +59,9 @@ namespace TestNSwagNetCoreApp
         public string Extra { get; set; }
 
         /// <summary>
-        /// The expiration date
+        /// 
         /// </summary>
-        public DateTime? ExpirationDate { get; set; }
+        [JsonProperty(Required = Required.Always)]
+        public string[] NullableStrings { get; set; } = {"Hello", null, "World"};
     }
 }

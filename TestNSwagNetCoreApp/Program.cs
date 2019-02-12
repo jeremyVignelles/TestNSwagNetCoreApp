@@ -25,6 +25,13 @@ namespace TestNSwagNetCoreApp
                         {
                             configure.DefaultReferenceTypeNullHandling = ReferenceTypeNullHandling.NotNull;
                             configure.GenerateKnownTypes = true;
+                            configure.PostProcess = doc =>
+                            {
+                                doc.Components.Schemas["HelloWorldModel"]
+                                    .ActualProperties["nullableStrings"]
+                                    .Item
+                                    .IsNullableRaw = true;
+                            };
                         });
                     services.AddMvc()
                         .SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
