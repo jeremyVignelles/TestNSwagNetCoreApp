@@ -62,6 +62,7 @@ namespace TestNSwagNetCoreApp
         /// 
         /// </summary>
         [JsonProperty(Required = Required.Always)]
+        [ItemsCanBeNull]
         public string[] NullableStrings { get; set; } = {"Hello", null, "World"};
     }
 }
