@@ -25,7 +25,10 @@
                                 configure.DefaultReferenceTypeNullHandling = ReferenceTypeNullHandling.NotNull;
                                 configure.GenerateKnownTypes = true;
                             });
-                            services.AddMvc();
+                            services.AddMvc(o =>
+                                {
+                                    o.InputFormatters.Insert(0, new RawInputFormatter());
+                                });
                         })
                         .Configure(app =>
                         {

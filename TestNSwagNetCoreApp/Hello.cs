@@ -2,6 +2,7 @@
 {
     using Microsoft.AspNetCore.Mvc;
     using Newtonsoft.Json;
+    using NSwag.Annotations;
     using System;
 
     /// <summary>
@@ -20,6 +21,17 @@
         public string Index()
         {
             return "Hello";
+        }
+
+        /// <summary>
+        /// Echoes the message passed as input
+        /// </summary>
+        [HttpPost("Echo")]
+        //[OpenApiBodyParameter("text/plain")] // Generates a StringModel and attempts to use it as a parameter
+        [TestOpenApiBodyParameter("text/plain")] // Accepts a Blob/Stream as input in the generated clients, but still generates a StringModel
+        public string Echo([FromBody] StringModel message)
+        {
+            return message.Content;
         }
 
         /// <summary>
