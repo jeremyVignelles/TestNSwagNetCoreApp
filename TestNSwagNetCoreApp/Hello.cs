@@ -25,6 +25,15 @@ namespace TestNSwagNetCoreApp
         }
 
         /// <summary>
+        /// Echoes the message passed as input
+        /// </summary>
+        [HttpPost("Echo")]
+        public string Echo([FromBody] string message)
+        {
+            return message;
+        }
+
+        /// <summary>
         /// Returns a greeting message, as a JSON object
         /// </summary>
         /// <returns>The greeting message</returns>
