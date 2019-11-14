@@ -5,6 +5,7 @@ namespace TestNSwagNetCoreApp
     using System;
     using Newtonsoft.Json;
     using NJsonSchema.Annotations;
+    using NSwag.Generation;
 
     /// <summary>
     /// 
@@ -28,6 +29,7 @@ namespace TestNSwagNetCoreApp
         /// Echoes the message passed as input
         /// </summary>
         [HttpPost("Echo")]
+        [OpenApiBodyParameter("text/plain")]
         public string Echo([FromBody] string message)
         {
             return message;
