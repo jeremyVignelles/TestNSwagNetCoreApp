@@ -1,13 +1,11 @@
-﻿using Microsoft.AspNetCore;
-using Microsoft.AspNetCore.Hosting;
-
-namespace TestNSwagNetCoreApp
+﻿namespace TestNSwagNetCoreApp
 {
+    using Microsoft.AspNetCore;
     using Microsoft.AspNetCore.Builder;
+    using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.Extensions.DependencyInjection;
-    using NJsonSchema;
-    using NSwag.AspNetCore;
+    using NJsonSchema.Generation;
 
     public class Program
     {
