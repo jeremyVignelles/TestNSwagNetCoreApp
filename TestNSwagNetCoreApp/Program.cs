@@ -29,7 +29,7 @@
                 })
                 .Configure(app =>
                 {
-                    app.UseSwagger()
+                    app.UseOpenApi()
                         .UseSwaggerUi3();
                     app.UseMvc();
                 });
