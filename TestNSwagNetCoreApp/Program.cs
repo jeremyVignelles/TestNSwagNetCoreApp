@@ -1,9 +1,8 @@
 ﻿namespace TestNSwagNetCoreApp
 {
-    using Microsoft.AspNetCore;
+    using Microsoft.Extensions.Hosting;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
-    using Microsoft.AspNetCore.Mvc;
     using Microsoft.Extensions.DependencyInjection;
     using NJsonSchema.Generation;
 
@@ -11,27 +10,33 @@
     {
         public static void Main(string[] args)
         {
-            CreateWebHostBuilder(args).Build().Run();
+            CreateHostBuilder(args).Build().Run();
         }
 
-        public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
-            WebHost.CreateDefaultBuilder(args)
-                .UseKestrel()
-                .ConfigureServices(services =>
+        public static IHostBuilder CreateHostBuilder(string[] args) =>
+            Host.CreateDefaultBuilder(args)
+                .ConfigureWebHostDefaults(webHost =>
                 {
-                    services.AddOpenApiDocument(configure =>
+                    webHost.UseKestrel()
+                        .ConfigureServices(services =>
                         {
-                            configure.DefaultReferenceTypeNullHandling = ReferenceTypeNullHandling.NotNull;
-                            configure.GenerateKnownTypes = true;
+                            services.AddOpenApiDocument(configure =>
+                            {
+                                configure.DefaultReferenceTypeNullHandling = ReferenceTypeNullHandling.NotNull;
+                                configure.GenerateKnownTypes = true;
+                            });
+                            services.AddMvc();
+                        })
+                        .Configure(app =>
+                        {
+                            app.UseRouting();
+                            app.UseEndpoints(endpoints =>
+                            {
+                                endpoints.MapControllers();
+                            });
+                            app.UseOpenApi()
+                                .UseSwaggerUi3();
                         });
-                    services.AddMvc()
-                        .SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
-                })
-                .Configure(app =>
-                {
-                    app.UseOpenApi()
-                        .UseSwaggerUi3();
-                    app.UseMvc();
                 });
     }
 }

@@ -1,10 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
-
-namespace TestNSwagNetCoreApp
+﻿namespace TestNSwagNetCoreApp
 {
-    using System;
+    using Microsoft.AspNetCore.Mvc;
     using Newtonsoft.Json;
-    using NJsonSchema.Annotations;
+    using System;
 
     /// <summary>
     /// 
@@ -50,7 +48,7 @@ namespace TestNSwagNetCoreApp
         /// 
         /// </summary>
         [JsonProperty(Required = Required.AllowNull)]
-        public string Extra { get; set; }
+        public string? Extra { get; set; }
 
         /// <summary>
         /// The expiration date
