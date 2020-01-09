@@ -33,11 +33,10 @@ namespace TestNSwagNetCoreApp
         {
             return new HelloWorldModel();
         }
-
+        
         /// <summary>
-        /// Returns a greeting message, as a JSON object
+        /// Returns info about the API
         /// </summary>
-        /// <returns>The greeting message</returns>
         [HttpGet("Info")]
         public OpenApiInfo ApiInfo()
         {
