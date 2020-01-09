@@ -34,6 +34,15 @@ namespace TestNSwagNetCoreApp
         {
             return new HelloWorldModel();
         }
+
+        /// <summary>
+        /// Returns info about the API
+        /// </summary>
+        [HttpGet("Info")]
+        public OpenApiInfo ApiInfo()
+        {
+            return new OpenApiInfo();
+        }
     }
 
     /// <summary>
