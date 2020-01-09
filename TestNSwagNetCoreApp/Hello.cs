@@ -1,4 +1,6 @@
-﻿namespace TestNSwagNetCoreApp
+﻿using NSwag;
+
+namespace TestNSwagNetCoreApp
 {
     using Microsoft.AspNetCore.Mvc;
     using Newtonsoft.Json;
@@ -30,6 +32,16 @@
         public HelloWorldModel Model()
         {
             return new HelloWorldModel();
+        }
+
+        /// <summary>
+        /// Returns a greeting message, as a JSON object
+        /// </summary>
+        /// <returns>The greeting message</returns>
+        [HttpGet("Info")]
+        public OpenApiInfo ApiInfo()
+        {
+            return new OpenApiInfo();
         }
     }
 
