@@ -30,8 +30,8 @@ namespace TestNSwagNetCoreApp
         /// Echoes the message passed as input
         /// </summary>
         [HttpPost("Echo")]
-        //[OpenApiBodyParameter("text/plain")] // Generates a StringModel and attempts to use it as a parameter
-        [TestOpenApiBodyParameter("text/plain")] // Accepts a Blob/Stream as input in the generated clients, but still generates a StringModel
+        //[OpenApiBodyParameter("text/plain")] // Does not generate text/plain but application/json input with string type
+        [TestOpenApiBodyParameter("text/plain")] // Works OK
         public string Echo([FromBody, JsonSchemaType(typeof(byte[]))] StringModel message)
         {
             return message.Content;
