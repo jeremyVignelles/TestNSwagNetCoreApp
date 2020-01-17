@@ -1,4 +1,7 @@
-﻿namespace TestNSwagNetCoreApp
+﻿using System.IO;
+using NJsonSchema.Annotations;
+
+namespace TestNSwagNetCoreApp
 {
     using Microsoft.AspNetCore.Mvc;
     using Newtonsoft.Json;
@@ -29,7 +32,7 @@
         [HttpPost("Echo")]
         //[OpenApiBodyParameter("text/plain")] // Generates a StringModel and attempts to use it as a parameter
         [TestOpenApiBodyParameter("text/plain")] // Accepts a Blob/Stream as input in the generated clients, but still generates a StringModel
-        public string Echo([FromBody] StringModel message)
+        public string Echo([FromBody, JsonSchemaType(typeof(byte[]))] StringModel message)
         {
             return message.Content;
         }
