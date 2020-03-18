@@ -1,4 +1,6 @@
-﻿namespace TestNSwagNetCoreApp
+﻿using NJsonSchema.Annotations;
+
+namespace TestNSwagNetCoreApp
 {
     using Microsoft.AspNetCore.Mvc;
     using Newtonsoft.Json;
@@ -49,6 +51,13 @@
         /// </summary>
         [JsonProperty(Required = Required.AllowNull)]
         public string? Extra { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        [JsonProperty(Required = Required.Always)]
+        //[ItemsCanBeNull]// Should not be required because already declared in the type:
+        public string?[] NullableStrings { get; set; } = {"Hello", null, "World"};
 
         /// <summary>
         /// The expiration date
