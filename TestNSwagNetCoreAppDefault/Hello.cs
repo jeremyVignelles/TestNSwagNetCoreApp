@@ -7,7 +7,9 @@ namespace TestNSwagNetCoreApp
     using Newtonsoft.Json;
     using System;
     /// <summary>
-    /// Using a base controller, the generated code is in Solution Items/ClientApi.cs
+    ///  Using a base controller, the generated code is in Solution Items/ClientApiDefault.cs
+    /// Should [ProducesResponseType(StatusCodes.Status204NoContent)] be defined here
+    /// in order to get the 204 without exception when the returned object is null?
     /// </summary>
     [Produces("application/json")]
     [Route("[controller]/[action]")]
@@ -15,23 +17,26 @@ namespace TestNSwagNetCoreApp
     {
 
     }
+    
     /// <summary>
     /// 
     /// </summary>
     public class HelloController : BaseController
     {
         /// <summary>
-        /// Returns a greeting message, as a JSON object
+        /// Here it is not generating 204 but on v13.6.2 it was
         /// </summary>
-        /// <returns>The greeting message</returns>
         [HttpGet]
         public Task<HelloWorldModel> Model() => Task.FromResult(new HelloWorldModel());
+
         /// <summary>
-        /// Returns null
+        /// If I define [ProducesResponseType(StatusCodes.Status204NoContent)]  here,
+        /// the generated method doesn't return
+        /// the Task[HelloWorldModel] but Task....
         /// </summary>
-        /// <returns></returns>
         [HttpGet]
-        public Task<HelloWorldModel?> NullableModel() => Task.FromResult(default(HelloWorldModel));
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        public Task<HelloWorldModel> NullableModel() => Task.FromResult(default(HelloWorldModel));
     }
 
     /// <summary>
