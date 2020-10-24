@@ -113,7 +113,7 @@
       "enumNameGeneratorType": null,
       "serviceHost": null,
       "serviceSchemes": null,
-      "output": null,
+      "output": "TestNSwagNetCoreApp/_GeneratedClients/Client.ts",
       "newLineBehavior": "Auto"
     },
     "openApiToCSharpClient": {
@@ -197,7 +197,7 @@
       "enumNameGeneratorType": null,
       "serviceHost": null,
       "serviceSchemes": null,
-      "output": null,
+      "output": "TestNSwagNetCoreApp/_GeneratedClients/Client.cs",
       "newLineBehavior": "Auto"
     }
   }
