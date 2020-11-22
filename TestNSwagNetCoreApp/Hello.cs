@@ -26,10 +26,19 @@
         /// Returns a greeting message, as a JSON object
         /// </summary>
         /// <returns>The greeting message</returns>
+        [ProducesResponseType(typeof(HelloWorldModel), 200)]
+        [ProducesResponseType(typeof(void), 204)]
         [HttpGet("Model")]
-        public HelloWorldModel Model()
+        public HelloWorldModel? Model()
         {
-            return new HelloWorldModel();
+            if (new Random().Next(100) > 50)
+            {
+                return new HelloWorldModel();
+            }
+            else
+            {
+                return null;
+            }
         }
     }
 
